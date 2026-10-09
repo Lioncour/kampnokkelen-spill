@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KampNøkkelen</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--papir:#cfc4ab;--papir2:#d8cfb9;--blekk:#4a4747;--skygge:#6d6a68;--cta:#c4553a;--cta2:#8a3524;--lys:#f4ecd8}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--papir);color:var(--blekk);
+font-family:ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace}
+body{background-image:radial-gradient(rgba(74,71,71,.13) 1px,transparent 1.2px);background-size:6px 6px;
+display:flex;flex-direction:column;align-items:center;padding:18px 12px 24px;min-height:100vh}
+header{text-align:center;margin:4px 0 14px}
+h1{margin:0;line-height:0}
+h1 img{width:696px;max-width:92vw;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+h1.tekst{font-size:clamp(30px,7vw,58px);line-height:1.1;letter-spacing:.12em;font-weight:900}
+.under{margin:10px 0 0;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.orn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.orn i{display:block;width:60px;height:2px;background:repeating-linear-gradient(90deg,var(--blekk) 0 2px,transparent 2px 4px)}
+.orn b{display:block;width:6px;height:6px;background:var(--blekk);transform:rotate(45deg)}
+#trailer{position:relative;background:var(--blekk);border:3px solid var(--blekk);box-shadow:0 6px 0 var(--skygge);
+overflow:hidden;cursor:pointer;width:min(92vw,630px);aspect-ratio:630/366}
+#trailer img{position:absolute;left:0;top:0;height:100%;width:auto;image-rendering:pixelated;image-rendering:crisp-edges;
+opacity:0;transition:opacity .7s linear;will-change:transform,opacity;user-select:none}
+#trailer img.vis{opacity:1}
+#trailer.still{cursor:default}
+#trailer.still img{position:static;width:100%;height:100%;object-fit:cover}
+#tekst{margin:0 0 12px;white-space:nowrap;min-height:2.2em;
+background:var(--papir);border:2px solid var(--blekk);box-shadow:0 3px 0 var(--skygge);padding:5px 14px 4px;
+font-weight:700;font-size:clamp(11px,2.6vw,17px);letter-spacing:.1em;text-transform:uppercase;transition:opacity .25s}
+#tekst.skjult{opacity:0}
+#tekst::before,#tekst::after{content:"";display:inline-block;width:5px;height:5px;background:var(--cta);
+transform:rotate(45deg);vertical-align:middle;margin:0 10px 3px}
+#blink{position:absolute;inset:0;z-index:2;background:var(--lys);opacity:0;pointer-events:none}
+#blink.paa{animation:blink .24s steps(3) 1}
+@keyframes blink{0%{opacity:.85}100%{opacity:0}}
+#frem{display:flex;gap:4px;width:min(92vw,630px);margin:14px 0 0}
+#frem span{flex:1;height:5px;background:rgba(74,71,71,.25);overflow:hidden}
+#frem span i{display:block;height:100%;width:0;background:var(--blekk)}
+form{margin:22px 0 0;text-align:center;width:min(92vw,460px)}
+label{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.rad{display:flex;gap:10px}
+input{flex:1;min-width:0;font:inherit;font-size:18px;padding:10px 12px;border:3px solid var(--blekk);
+background:var(--papir2);color:var(--blekk);border-radius:0;outline:none}
+input:focus{background:var(--lys)}
+button{font:inherit;font-size:18px;font-weight:900;letter-spacing:.18em;padding:10px 22px;border:3px solid var(--cta2);
+background:var(--cta);color:var(--lys);cursor:pointer;box-shadow:0 5px 0 var(--cta2);border-radius:0;position:relative;top:0}
+button:hover{background:#d0624a}
+button:active{top:4px;box-shadow:0 1px 0 var(--cta2)}
+#feil{color:var(--cta2);min-height:1.4em;margin:12px 0 0;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.rist{animation:rist .36s steps(6) 1}
+@keyframes rist{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}
+60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+#dor{position:fixed;inset:0;z-index:9;background:var(--blekk);color:var(--papir);display:flex;align-items:center;
+justify-content:center;font-size:clamp(18px,4vw,30px);font-weight:900;letter-spacing:.2em;opacity:0;pointer-events:none;
+transition:opacity .35s steps(4)}
+#dor.paa{opacity:1;pointer-events:auto}
+footer{margin-top:auto;padding-top:24px;font-size:11px;letter-spacing:.12em;opacity:.7;text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){#trailer img{transition-duration:.2s}#blink.paa{animation:none}}
+</style></head><body>
+<header><h1><img src="trailer/tittel.png" alt="KampNøkkelen" width="348" height="33"></h1>
+<p class="under">En hyllest til Oslonøkkelen og teamet bak</p>
+<div class="orn"><i></i><b></b><i></i></div></header>
+<section id="trailer" class="still" aria-label="Fra spillet"><img class="vis" src="trailer/meny.png" alt="Hovedmenyen i KampNøkkelen med alle kjemperne"></section>
+<form id="f"><label for="pw">Skriv passordet for å spille</label>
+<div class="rad"><input id="pw" type="password" autocomplete="current-password"><button>SPILL</button></div>
+<p id="feil" role="alert"></p></form>
+<footer>Et 2.5D beat 'em up &middot; tastatur eller gamepad</footer>
+<div id="dor">ÅPNER DØREN …</div>
+<script>
+const SALT="946e098d47a1d963d76e9b69b5ee1bee", HASH="69db0d0c38070c1aab39a7c7cf82c2a6ee4ed90635b3c717c1e65d779be46546";
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));
+return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}
+if(sessionStorage.getItem("kn_ok")===HASH){location.replace("spill.html");}
+const pw=document.getElementById("pw"), feil=document.getElementById("feil"), form=document.getElementById("f");
+if(matchMedia("(pointer:fine)").matches){pw.focus();}
+function inn(){document.getElementById("dor").classList.add("paa");setTimeout(()=>location.replace("spill.html"),550);}
+document.getElementById("f").onsubmit=async e=>{e.preventDefault();
+if(await sha(SALT+document.getElementById("pw").value)===HASH){sessionStorage.setItem("kn_ok",HASH);inn();}
+else{feil.textContent="Feil passord";form.classList.remove("rist");void form.offsetWidth;form.classList.add("rist");pw.select();}};
+pw.addEventListener("input",()=>{feil.textContent="";});
+
+// Traileren: lysbildefilm med crossfade, panorering i hele spillpiksler og fremdriftslinje
+const BILDER=[];
+const VIS=4200, KANT=8, ROLIG=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const ramme=document.getElementById("trailer");
+if(ramme&&BILDER.length){
+const tekst=document.getElementById("tekst"), blink=document.getElementById("blink"), frem=document.getElementById("frem");
+const imgs=BILDER.map(b=>{const i=new Image();i.src="trailer/"+b.fil;i.alt=b.tekst;i.draggable=false;
+i.onerror=()=>{i.dataset.feil="1";};ramme.insertBefore(i,blink);return i;});
+const fyll=BILDER.map(()=>{const s=document.createElement("span"),i=document.createElement("i");s.appendChild(i);frem.appendChild(s);return i;});
+let skala=1, nr=-1, start=0;
+// Bildene er 640x360; rammen viser 624 px i bredden, så det er 8 px å panorere på hver side.
+// Heltallsskala i skjermpiksler når det er plass (skarpe piksler), ellers krymper vi (mobil).
+function tilpass(){const d=devicePixelRatio||1, w=Math.min(innerWidth*0.92,1872), h=Math.max(innerHeight-380,180);
+let s=Math.min(w/624,h/360)*d;s=(s>=1?Math.floor(s):s)/d;skala=s;
+ramme.style.aspectRatio="auto";ramme.style.width=Math.round(624*s+6)+"px";ramme.style.height=Math.round(360*s+6)+"px";
+frem.style.width=ramme.style.width;}
+function vis(n){const forrige=imgs[nr];
+for(let k=0;k<imgs.length;k++){nr=(n+k+imgs.length)%imgs.length;if(!imgs[nr].dataset.feil){break;}}
+start=performance.now();
+if(forrige&&forrige!==imgs[nr]){forrige.classList.remove("vis");}
+imgs[nr].classList.add("vis");
+fyll.forEach((f,i)=>{f.style.width=i<nr?"100%":"0";});
+tekst.classList.add("skjult");setTimeout(()=>{tekst.textContent=BILDER[nr].tekst;tekst.classList.remove("skjult");},250);
+if(BILDER[nr].fil.startsWith("vs_")&&!ROLIG){blink.classList.remove("paa");void blink.offsetWidth;blink.classList.add("paa");}}
+function panorer(i,p){const steg=ROLIG?KANT:Math.round(p*KANT*2);
+const x=i%2?-steg:-(KANT*2-steg);imgs[i].style.transform="translateX("+Math.round(x*skala)+"px)";}
+function tikk(na){if(na-start>=VIS){vis(nr+1);}
+const p=Math.min(Math.max((na-start)/VIS,0),1);fyll[nr].style.width=(p*100).toFixed(1)+"%";
+panorer(nr,p);
+requestAnimationFrame(tikk);}
+ramme.addEventListener("click",()=>vis(nr+1));
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){start=performance.now();}});
+addEventListener("resize",tilpass);tilpass();
+imgs.forEach((img,i)=>panorer(i,0));
+vis(0);requestAnimationFrame(tikk);}
+</script></body></html>
