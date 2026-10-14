@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KampNøkkelen – døren er stengt</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--papir:#cfc4ab;--papir2:#d8cfb9;--blekk:#4a4747;--skygge:#6d6a68;--stein:#a39b8c;--cta:#c4553a;--cta2:#8a3524;--gull:#f9c66b;--gull2:#b07a2a}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--papir);color:var(--blekk);
+font-family:"Courier New",ui-monospace,monospace;-webkit-font-smoothing:none}
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;
+background-image:radial-gradient(var(--stein) 1px,transparent 1px);background-size:6px 6px}
+.kort{position:relative;width:min(560px,94vw);background:var(--papir2);border:3px solid var(--blekk);
+box-shadow:0 8px 0 var(--skygge);padding:28px 26px 30px;text-align:center}
+.kort:before,.kort:after{content:"";position:absolute;left:14px;right:14px;height:2px;
+background:repeating-linear-gradient(90deg,var(--blekk) 0 2px,transparent 2px 5px)}
+.kort:before{top:8px}.kort:after{bottom:8px}
+.feil{font-size:clamp(64px,18vw,120px);font-weight:900;letter-spacing:.06em;line-height:1;margin:6px 0 0;
+text-shadow:4px 4px 0 var(--stein)}
+h1{font-size:clamp(18px,4.6vw,28px);letter-spacing:.12em;margin:14px 0 6px;text-transform:uppercase}
+p{margin:6px 0;font-size:clamp(13px,3.2vw,16px);letter-spacing:.04em}
+.banner{display:inline-block;margin:16px 0 4px;padding:6px 14px 5px;border:2px solid var(--blekk);
+background:var(--papir);box-shadow:0 3px 0 var(--skygge);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:13px}
+.ko{margin-top:12px;font-size:12px;letter-spacing:.08em;opacity:.8}
+.ko b{display:inline-block;min-width:4.5ch;color:var(--cta)}
+.stempel{position:absolute;right:-10px;top:18px;transform:rotate(12deg);border:3px solid var(--cta);color:var(--cta);
+padding:4px 10px;font-weight:900;letter-spacing:.14em;background:rgba(216,207,185,.85);font-size:15px;
+animation:stemp .5s cubic-bezier(.3,1.6,.6,1) .6s both}
+@keyframes stemp{from{transform:rotate(12deg) scale(3);opacity:0}to{transform:rotate(12deg) scale(1);opacity:1}}
+.dor{width:132px;height:156px;margin:4px auto 0;position:relative;image-rendering:pixelated}
+.dor svg{width:100%;height:100%;display:block}
+.nokkel{animation:svev 2.4s steps(6) infinite}
+@keyframes svev{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.nokkel,.stempel{animation:none}}
+</style></head><body>
+<main class="kort">
+<div class="stempel">STENGT</div>
+<div class="dor" aria-hidden="true">
+<svg viewBox="0 0 33 39" shape-rendering="crispEdges">
+<rect x="4" y="2" width="25" height="35" fill="#4a4747"/>
+<rect x="6" y="4" width="21" height="31" fill="#6d6a68"/>
+<rect x="8" y="6" width="17" height="12" fill="#5a5656"/><rect x="8" y="20" width="17" height="13" fill="#5a5656"/>
+<rect x="20" y="19" width="3" height="3" fill="#f9c66b"/>
+<rect x="2" y="36" width="29" height="2" fill="#4a4747"/>
+<g class="nokkel">
+<rect x="3" y="24" width="7" height="7" fill="#f9c66b"/><rect x="5" y="26" width="3" height="3" fill="#d8cfb9"/>
+<rect x="10" y="26" width="9" height="2" fill="#f9c66b"/><rect x="15" y="28" width="1" height="2" fill="#b07a2a"/><rect x="17" y="28" width="1" height="3" fill="#b07a2a"/>
+</g>
+<rect x="11" y="10" width="11" height="4" fill="#c4553a"/><rect x="12" y="11" width="9" height="2" fill="#d8cfb9"/>
+</svg>
+</div>
+<div class="feil">404</div>
+<h1>Døren er stengt</h1>
+<p>KampNøkkelen er tatt ned en liten stund.</p>
+<p>Kom tilbake om noen timer.</p>
+<div class="banner">Saken er under behandling …</div>
+<div class="ko">Du er nr. <b id="nr">4711</b> i køen</div>
+</main>
+<script>
+// Køen går sakte, slik den skal
+let n=4711;setInterval(()=>{n=Math.max(1,n-1);document.getElementById("nr").textContent=n},2600);
+</script>
+</body></html>
